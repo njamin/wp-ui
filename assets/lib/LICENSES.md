@@ -5,8 +5,9 @@
 | `alpine-csp.3.17.4.min.js` | [Alpine.js](https://github.com/alpinejs/alpine), `@alpinejs/csp` `dist/cdn.min.js` | 3.17.4 | MIT, © Caleb Porzio and contributors |
 | `alpine-focus.3.17.4.min.js` | Alpine.js, `@alpinejs/focus` `dist/cdn.min.js` | 3.17.4 | MIT, © Caleb Porzio and contributors |
 | `../../data/lucide-icons.php` | [Lucide](https://lucide.dev), generated from `lucide-static` by `bin/generate-icons.php` | 1.52.0 | ISC, © Lucide Icons and Contributors |
+| `../../data/lucide-icons.php` | [Lucide Lab](https://lucide.dev/icons/lab), `@lucide/lab`, generated with the above | 0.7.0 | ISC, © Lucide Icons and Contributors |
 
-ISC License (Lucide): Permission to use, copy, modify, and/or distribute this software for any
+ISC License (Lucide and Lucide Lab): Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above copyright notice and this
 permission notice appear in all copies. THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS
 ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND

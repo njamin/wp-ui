@@ -6,8 +6,9 @@ interactivity and the full Lucide icon set. Design tokens and UI primitives join
 
 - **Alpine**, CSP build, with its `focus` plugin, self-hosted and registered as `bp-alpine` (which
   loads `bp-alpine-focus` first). Both are deferred.
-- **Lucide**, every icon of the release, inlined server-side: `Icon::svg( 'lock' )`. A page carries
-  only the icons it shows; they take the colour of their text.
+- **Lucide**, every icon of the release plus Lucide Lab's (sports and other extras, such as
+  `bat-ball`), inlined server-side: `Icon::svg( 'lock' )`. A page carries only the icons it shows;
+  they take the colour of their text.
 
 ## Requirements
 
@@ -54,15 +55,17 @@ echo \BP\UI\Icon::svg( 'filter', __( 'Filtres' ) );      // stands alone: an ima
 add_menu_page( …, \BP\UI\Icon::data_uri( 'users' ) );   // admin menu icon
 ```
 
-An unknown name throws, so a typo shows in tests. Names are Lucide's (lucide.dev/icons).
+An unknown name throws, so a typo shows in tests. Names are Lucide's (lucide.dev/icons) and Lucide
+Lab's (lucide.dev/icons/lab); where both have a name, the main set's icon is used.
 
 ## Updating
 
 Alpine: replace the two files in `assets/lib/`, bump `Plugin::ALPINE_VERSION`. Lucide:
 
 ```bash
-npm pack lucide-static@<version> && tar -xzf lucide-static-<version>.tgz
-php bin/generate-icons.php package
+npm pack lucide-static@<version> @lucide/lab@<version>
+mkdir core lab && tar -xzf lucide-static-*.tgz -C core && tar -xzf lucide-lab-*.tgz -C lab
+php bin/generate-icons.php core/package lab/package
 ```
 
 Licences of the bundled files: `assets/lib/LICENSES.md`.

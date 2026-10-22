@@ -8,19 +8,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Lucide icons, inlined as SVG: a page carries only the icons it shows, styled with
- * `currentColor`, so an icon takes the colour of its text.
+ * Lucide icons, the main set and Lucide Lab, inlined as SVG: a page carries only the icons it
+ * shows, styled with `currentColor`, so an icon takes the colour of its text.
  */
 final class Icon {
 
-	/** @var array{version: string, icons: array<string, string>}|null */
+	/** @var array{version: string, lab_version: ?string, icons: array<string, string>}|null */
 	private static ?array $data = null;
 
 	/**
 	 * An icon's SVG. Decorative by default (hidden from screen readers); a `$label` makes it an
 	 * image with that accessible name, for an icon that stands alone.
 	 *
-	 * @throws InvalidArgumentException When Lucide has no icon of that name: a typo must show.
+	 * @throws InvalidArgumentException When Lucide and Lucide Lab have no icon of that name: a typo
+	 *                                  must show.
 	 */
 	public static function svg( string $name, string $label = '', int $size = 20, string $extra_class = '' ): string {
 		$inner = self::data()['icons'][ $name ] ?? throw new InvalidArgumentException( 'No Lucide icon named ' . esc_html( $name ) );
@@ -60,7 +61,12 @@ final class Icon {
 		return self::data()['version'];
 	}
 
-	/** @return array{version: string, icons: array<string, string>} */
+	/** The Lucide Lab release its icons come from; null without Lab. */
+	public static function lab_version(): ?string {
+		return self::data()['lab_version'] ?? null;
+	}
+
+	/** @return array{version: string, lab_version: ?string, icons: array<string, string>} */
 	private static function data(): array {
 		return self::$data ??= require dirname( __DIR__ ) . '/data/lucide-icons.php';
 	}

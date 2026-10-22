@@ -14,6 +14,13 @@ final class IconTest extends TestCase {
 		}
 	}
 
+	public function test_lucide_lab_icons_are_there_and_the_main_set_wins_a_shared_name(): void {
+		$this->assertSame( '0.7.0', Icon::lab_version() );
+		$this->assertTrue( Icon::exists( 'bat-ball' ) );
+		$this->assertStringContainsString( '<circle cx="18" cy="18" r="4"/>', Icon::svg( 'bat-ball' ) );
+		$this->assertStringContainsString( 'M20.8 15.2c1.9-3.4', Icon::svg( 'bat-ball' ) );
+	}
+
 	public function test_a_decorative_icon_is_hidden_from_screen_readers(): void {
 		$svg = Icon::svg( 'lock' );
 
