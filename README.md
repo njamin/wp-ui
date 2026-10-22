@@ -1,9 +1,11 @@
 # njamin/wp-ui
 
-The shared UI layer of WordPress projects made from the blueprint: Alpine.js (CSP build) for
-interactivity and the full Lucide icon set. Design tokens and UI primitives join it later
-(blueprint P6).
+The shared UI layer of WordPress projects made from the blueprint: design tokens as CSS variables,
+Alpine.js (CSP build) for interactivity and the full Lucide icon set. UI primitives and per-client
+branding (`bp brand`) join it later (blueprint P6).
 
+- **Tokens**, WordPress 7's design tokens as CSS variables (`--bp-color-*`, `--bp-tone-*`,
+  `--bp-space-*`, `--bp-radius-*`, …), registered as `bp-tokens`.
 - **Alpine**, CSP build, with its `focus` plugin, self-hosted and registered as `bp-alpine` (which
   loads `bp-alpine-focus` first). Both are deferred.
 - **Lucide**, every icon of the release plus Lucide Lab's (sports and other extras, such as
@@ -27,6 +29,29 @@ loader:
 ```php
 \BP\UI\Plugin::boot();
 ```
+
+## Tokens
+
+`tokens.json` is the one source: colours, type, spacing (a 4px scale), control sizes, radii,
+shadows, motion. `bin/generate-tokens.php` writes `assets/tokens.css` from it, which declares every
+token as `--<name>` on `:root`. A stylesheet depends on the handle and uses the variables, never a
+raw value:
+
+```php
+wp_register_style( 'acme-admin', $url, [ \BP\UI\Plugin::TOKENS ], $version );
+```
+
+```css
+.acme-card { padding: var(--bp-space-6); background: var(--bp-color-surface); border-radius: var(--bp-radius-l); }
+.acme-card:hover { transition: box-shadow var(--bp-duration-base) var(--bp-ease-out); }
+```
+
+- In wp-admin, `--bp-color-action` (and its hover and tint) follow the user's admin colour scheme.
+- Under `prefers-reduced-motion`, every `--bp-duration-*` is `0s`, so motion built on them stops.
+- A project's brand overrides a token in its own stylesheet (`--bp-font-display`), never edits the file.
+- `tokens.json` uses the Design System artifact's format: a project's style guide reads it as is.
+
+After editing `tokens.json`: `php bin/generate-tokens.php`.
 
 ## Alpine
 
