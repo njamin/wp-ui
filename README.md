@@ -12,6 +12,20 @@ branding (`bp brand`) join it later (blueprint P6).
   `bat-ball`), inlined server-side: `Icon::svg( 'lock' )`. A page carries only the icons it shows;
   they take the colour of their text.
 
+## What belongs here
+
+Every client project inherits this package, so it holds only what any client needs: semantic tokens
+with neutral defaults, primitives and icons. Before adding something, place it:
+
+- **Any client needs it** (a 16px field so phones do not zoom, a 48px touch target): here.
+- **It is one client's look** (its colours, fonts, corner radius, type scale): that project's brand
+  (`config/brand.json`), overriding the semantic tokens.
+- **It belongs to one pattern** (a multi-step journey's width, its progress bar): the project's
+  pattern stylesheet, as named values at its top, until a second client needs the same pattern
+  (DESIGN-wordpress-blueprint §4.10.4, the rule of two). Then it is generalised and moves here.
+
+A value copied from a client's current site or design is that client's, not a default.
+
 ## Requirements
 
 WordPress 7.0 or later, PHP 8.3 or later, `composer/installers`.
@@ -47,6 +61,8 @@ wp_register_style( 'acme-admin', $url, [ \BP\UI\Plugin::TOKENS ], $version );
 ```
 
 - In wp-admin, `--bp-color-action` (and its hover and tint) follow the user's admin colour scheme.
+- On a public page, fields use `--bp-text-body` (16px, so phones do not zoom) and
+  `--bp-control-height-touch` (48px, for a finger).
 - Under `prefers-reduced-motion`, every `--bp-duration-*` is `0s`, so motion built on them stops.
 - A project's brand overrides a token in its own stylesheet (`--bp-font-display`), never edits the file.
 - `tokens.json` uses the Design System artifact's format: a project's style guide reads it as is.

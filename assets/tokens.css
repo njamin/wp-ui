@@ -30,6 +30,7 @@
 	--bp-text-s: 12px;
 	--bp-text-m: 13px;
 	--bp-text-l: 15px;
+	--bp-text-body: 16px;
 	--bp-space-1: 4px;
 	--bp-space-2: 8px;
 	--bp-space-3: 12px;
@@ -40,6 +41,7 @@
 	--bp-space-12: 48px;
 	--bp-control-height: 40px;
 	--bp-control-height-compact: 36px;
+	--bp-control-height-touch: 48px;
 	--bp-radius-s: 2px;
 	--bp-radius-m: 4px;
 	--bp-radius-l: 8px;
